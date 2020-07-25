@@ -10,5 +10,12 @@ This website allows registered users to -:
   Follow Users
   Have a for you page where only posts from people being followed are shown
 
+## ACCOUNT (IF YOU DO NOT WANT TO MAKE YOUR OWN)
+username : safari
+password: apple
+
+### Known Bugs
+
+ONLY ON HEROKU - New Information added dissapears after server restarts, This is because the database is a part of the source (on github) and heroku can not manipulate it. A viable fix is to move the database to a seperate online server (possibly the postgres heroku addon)
 
 
