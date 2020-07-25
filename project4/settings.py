@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
 
-    'postgresql': {
+    'PDB': {
         dj_database_url.config(default=os.getenv('DATABASE_URL'))
     }
 
