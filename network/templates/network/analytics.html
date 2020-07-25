@@ -1,0 +1,19 @@
+{% extends "network/layout.html" %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+
+{% block body %}
+   <h3>{{requestType}}</h3>
+   {% for user in users %}
+   <ul>
+      <li>
+          <a class = "whiteLinkTag" href="{% url 'userPage' user.id %}"> {{user.username}} </a>
+         
+      </li>
+   </ul>
+   {% empty %}
+   <h4>No Users</h4>
+   {% endfor %}
+{% endblock %}

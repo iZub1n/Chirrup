@@ -1,0 +1,119 @@
+
+.nav-green { 
+    background-color: #2bb2a4; 
+} 
+
+.btn-green{
+    margin: 10px;
+    color: white;
+    background-color: #2bb2a4; 
+}
+
+.post{
+    background-color: gray;
+    margin: 15px;
+    border-radius: 20px;
+    padding: 15px;
+    padding-bottom: 2px;
+    padding-top: 10px;
+    font-weight: lighter;
+    font-size: large;
+}
+
+.whiteLinkTag{
+}
+
+a.whiteLinkTag:link {
+    color: white;
+    text-decoration: none;
+  }
+
+ a.whiteLinkTag:visited {
+     color: white;
+     text-decoration: none;
+ }
+
+ a.whiteLinkTag:hover {
+    color: white;
+    text-shadow: 1px 1px 4px;
+}
+
+.whiteLinkTag{
+}
+
+a.whiteLinkTag:link {
+    color: white;
+    text-decoration: none;
+  }
+
+ a.whiteLinkTag:visited {
+     color: white;
+     text-decoration: none;
+ }
+
+ a.whiteLinkTag:hover {
+    color: white;
+    text-shadow: 1px 1px 4px;
+
+}.blackLinkTag{
+}
+
+a.blackLinkTag:link {
+    color: black;
+    text-decoration: none;
+  }
+
+ a.blackLinkTag:visited {
+     color: black;
+     text-decoration: none;
+ }
+
+ a.blackLinkTag:hover {
+    text-shadow: 1px 1px 4px white;
+}
+
+.container {
+  height: 100px;
+  position: relative;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+.pagination{
+    background-color: #2bb2a4;
+    color: white;
+}
+
+.btn-POP{
+}
+
+button.btn-POP:hover{
+    font-size: larger;
+}
+
+.comment{
+    position: sticky;
+    left: 90%;
+}
+
+textarea {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;    
+    box-sizing: border-box;    
+    background-color: transparent;
+    color: white;
+    font-weight: lighter;
+    border: none;
+}
+
+label{
+    color: black;
+    font-weight: normal;
+}

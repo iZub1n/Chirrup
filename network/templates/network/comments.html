@@ -1,0 +1,43 @@
+{% extends "network/layout.html" %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+
+{% block body %}
+   <h3>{{requestType}}</h3>
+   
+   <div class = post>
+      <h7 style="text-align: center;"><b><a class = "whiteLinkTag" href="{% url 'userPage' post.poster.id %}">{{post.poster}}</a></b>____ ____ ____{{post.dTCreated}}</h7>
+      <br></br>
+      {{post.content}}
+      <hr style="background-color:#1c2a3b"></hr>
+      <button class="btn-POP btn btn-default">👍 {{post.likes}}</button>
+      <button class="btn-POP btn btn-default">👎 {{post.dislikes}}</button>
+      {% if user.id == post.poster.id %}
+      <button class="btn btn-default">Edit Post 📝</button>
+      {% endif %}
+      <a style="float: right; color: black; font-weight:normal" href="{% url 'commentsPage' user.id post.id %}">Comments</a>
+   </div>
+
+
+   {% for comment in comments %}
+   <ul>
+      <li>
+         
+      <div class = post>
+         <h7 style="text-align: center;"><a class = "whiteLinkTag" href="{% url 'userPage' comment.commenter.id %}">{{comment.commenter.username}}</a>____ ____ ____{{comment.dTCreated}}</h7>
+         <br></br>
+         {{comment.content}}
+         <hr style="background-color:#1c2a3b"></hr>
+         <button class="btn-POP btn btn-default">👍 {{comment.likes}}</button>
+         <button class="btn-POP btn btn-default">👎 {{comment.dislikes}}</button>
+      </div>
+      </li>
+   </ul>
+   {% empty %}
+      <div>
+         <h4>No comments yet. Start a discussion!</h4>
+      </div>
+   {% endfor %}
+{% endblock %}

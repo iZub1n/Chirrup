@@ -1,0 +1,12 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div class="form-group" style="padding: 30px;">
+        <form action="{% url 'chirpPost' %}" method="POST">
+            {% csrf_token %}
+            <label style="color: white;" for="chirp">New Chirp 🖋</label>
+            <textarea class="form-control" rows="5" id="chirp" name="chirp" placeholder="What's happening?"></textarea>
+            <input style="margin-left: 45%;" id="chirpBtn" type="submit" class="btn btn-green" value="Chirp!">
+        </form>
+    </div>
+{% endblock %}

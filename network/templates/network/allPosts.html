@@ -1,0 +1,66 @@
+{% extends "network/layout.html" %}
+
+{% block scripts %}
+   {% load static %}
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+   <script type="text/javascript" src="{% static 'network/scripts.js' %}"></script>
+{% endblock %}
+
+
+{% block body %}
+   <h3>All Posts</h3>
+   {% for post in page_obj %}
+      {{post.reaction}}
+      <div class = "post" id=id{{post.id}}>
+         <h7 style="text-align: center;"><b><a class = "whiteLinkTag" href="{% url 'userPage' post.poster.id %}">{{post.poster}}</a></b>____ ____ ____{{post.dTCreated}}</h7>
+         {% if post.Edited%}
+         ( edited on {{post.dTEdited}})
+       {% endif%}
+         <br></br>
+         <div id=content>
+            <textarea class='textarea' readonly>{{post.content}}</textarea>
+         </div>
+         <hr style="background-color:#1c2a3b"></hr>
+         <form id="reactionForm" method="POST">
+            {% csrf_token %}
+            <button value={{post.likes}} class="btn-POP btn btn-default" id="likeBtn">👍</button>
+            <label id="like">{{post.likes}}</label>
+            <button value={{post.dislikes}} class="btn-POP btn btn-default" id="dislikeBtn">👎</button>
+            <label id="dislike">{{post.dislikes}}</label>
+         </form>
+         {% if user.id == post.poster.id %}
+            <button id="editBtn" class="btn btn-default" href="#">Edit Post 📝</button>
+            <form id="updateForm" method="POST">
+               {% csrf_token %}
+               <div class="id", id={{post.id}}></div>
+               <input id="dBtn" style=" visibility: hidden; color:white" class="btn btn-primary" type="submit" value="Done ✅">
+            </form>
+         {% endif %}
+         <a class="blackLinkTag comment" style="font-weight:normal" href="{% url 'commentsPage' user.id post.id %}">Comments</a>
+      </div>
+   {% empty %}
+   <h4>No Posts</h4>
+   {% endfor %}
+   <div class="container">
+      <div class="vertical-center">
+         <nav aria-label="Page navigation example">
+            <ul class="pagination">
+               {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link pagination" href="?page=1">&laquo; first</a></li>
+                  <li class="page-item"><a class="page-link pagination" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+               {% endif %}
+            
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link pagination"  href="?page={{ page_obj.next_page_number }}">next</a>
+            <li class="page-item"><a class="page-link pagination"  href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+         {% endif %}
+      </ul>
+         <span>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+         </span>
+            
+         </nav>
+      </div>
+   </div>
+{% endblock %}

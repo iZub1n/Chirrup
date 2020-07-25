@@ -1,0 +1,67 @@
+{% extends "network/layout.html" %}
+
+{% block scripts %}
+{% load static %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript" src="{% static 'network/scripts.js' %}"></script>
+
+{% endblock scripts %}
+
+
+{% block body %}
+   <h3> {{userSearched.username}} </h3>
+   {% if user.id != userSearched.id%}
+   {% if  following %}
+   <form action="{% url 'follow' userSearched.id %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+         <input class="btn btn-primary" type="submit" value="Follow">
+      </div>
+  </form>
+  {% else %}
+      <form action="{% url 'unfollow' userSearched.id  %}" method="post">
+         {% csrf_token %}
+         <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Unfollow">
+         </div>
+      </form>
+  {% endif %}
+  {% endif %}
+   <h5>
+      <a class="whiteLinkTag" href="{% url 'followersList' user.id %}"> {{followerCount}} Followers </a>
+      &nbsp 
+      <a class="whiteLinkTag" href="{% url 'followingList' user.id %}"> {{followingCount}} Following </a>
+   </h5>
+   <div id="posts">
+   </h5>
+   {% for post in posts %}
+       <div class = "post" id=id{{post.id}}>
+         <h7 style="text-align: center;">{{post.poster}}____ ____ ____{{post.dTCreated}}</h7>
+         {% if post.Edited %}
+         ( edited on {{post.dTEdited}})
+         {% endif%}
+         <br></br>
+         <div id=content>
+            <textarea class='textarea' readonly>{{post.content}}</textarea>
+         </div>
+         <hr style="background-color:#1c2a3b"></hr>
+         <form id="reactionForm" method="POST">
+            {% csrf_token %}
+            <button value={{post.likes}} class="btn-POP btn btn-default" id="likeBtn">👍</button>
+            <label id="like">{{post.likes}}</label>
+            <button value={{post.dislikes}} class="btn-POP btn btn-default" id="dislikeBtn">👎</button>
+            <label id="dislike">{{post.dislikes}}</label>
+         </form>
+         {% if user.id == post.poster.id %}
+            <button id="editBtn" class="btn btn-default" href="#">Edit Post 📝</button>
+            <form id="updateForm" method="POST">
+               {% csrf_token %}
+               <input id="dBtn" style="visibility: hidden; color:white" class="btn btn-primary" type="submit" value="Done ✅">
+            </form>
+         {% endif %}
+      </div>
+   {% empty %}
+   <h4>No Posts</h4>
+   {% endfor %}
+{% endblock %}
